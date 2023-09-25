@@ -14,6 +14,40 @@
 [ruff-badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
 [mypy-badge]: https://www.mypy-lang.org/static/mypy_badge.svg
 
+# Python Programming Test
+
+## Your Task: A News Search Engine
+Your task is to write an application that, when executed, prompts the user for an arbitrary topic (free text defined by the user) and subsequently searches the web for suitable recent news articles that fit the given topic. You may use any 3rd API to retrieve news content and don’t have to implement your own indexing/search or database system. The output of your application should consist of the following: a) the list of titles, URLs and publication dates of the top-15 matching news articles from (at least) the last month and sorted by relevancy w.r.t. the given topic; b) a csv file containing the full list of titles, URLs and publication dates of matching articles from (at least) the last month (the file should be written right after search); and c) an automatically generated summary (you may use another 3rd party API or library) of the (top-15) article headlines, along with a list of all named entities mentioned in the (top-15) article headlines, sorted by frequency.
+User prompts and outputs may be given on the commandline or via other means (no need to implement a UI or web interface). However, users should be able to search multiple times (for different topics) at runtime.
+The overall project should contain a simple README (with installation and execution specifics) and a requirements file.
+
+## Goals
+* prompts the user for an arbitrary topic (free text defined by the user) and subsequently searches the web for suitable recent news articles that fit the given topic
+* Create list of titles, URLs and publication dates of the top-15 matching news articles from (at least) the last month and sorted by relevancy w.r.t. the given topic
+* Create a csv file containing the full list of titles, URLs and publication dates of matching articles from (at least) the last month (the file should be written right after search)
+* Create an automatically generated summary (you may use another 3rd party API or library) of the (top-15) article headlines, along with a list of all named entities mentioned in the (top-15) article headlines, sorted by frequency
+* User prompts and outputs may be given on the commandline or via other means (no need to implement a UI or web interface)
+* Users should be able to search multiple times (for different topics) at runtime
+* The overall project should contain a simple README (with installation and execution specifics) and a requirements file
+
+## Hints
+* If you use a secret key to access a third party API, don't submit your secret key, but add an explanation how to get a new one.
+
+## Bonus points for:
+* Ability to choose language before search (e.g. German and English), to limit results to a particular language.
+* Unit Tests
+
+
+# Usage
+
+## Running the Application
+
+```bash
+$ lazy_search "Topic"
+```
+
+
+
 Example Python project that demonstrates how to create a Python package using the latest
 Python testing, linting, and type checking tooling. The project contains a `fact` package that
 provides a simple implementation of the
@@ -57,7 +91,7 @@ $ poetry shell
 To deactivate the environment:
 
 ```bash
-(fact) $ exit
+(lazy-search) $ exit
 ```
 
 To upgrade all dependencies to their latest versions:
@@ -115,7 +149,7 @@ guide checking, type checking and documentation generation.
 To run all default sessions:
 
 ```bash
-(fact) $ nox
+(lazy-search) $ nox
 ```
 
 ## Unit Testing
@@ -147,7 +181,7 @@ pytest and code coverage are configured in [`pyproject.toml`](./pyproject.toml).
 To pass arguments to `pytest` through `nox`:
 
 ```bash
-(fact) $ nox -s test -- -k invalid_factorial
+(lazy-search) $ nox -s test -- -k invalid_factorial
 ```
 
 ## Code Style Checking
@@ -162,13 +196,13 @@ configured automatically in editors such as PyCharm.
 To lint code, run:
 
 ```bash
-(fact) $ nox -s lint
+(lazy-search) $ nox -s lint
 ```
 
 To automatically fix fixable lint errors, run:
 
 ```bash
-(fact) $ nox -s lint_fix
+(lazy-search) $ nox -s lint_fix
 ```
 
 ## Automated Code Formatting
@@ -183,13 +217,13 @@ These tools are configured by:
 To automatically format code, run:
 
 ```bash
-(fact) $ nox -s fmt
+(lazy-search) $ nox -s fmt
 ```
 
 To verify code has been formatted, such as in a CI job:
 
 ```bash
-(fact) $ nox -s fmt_check
+(lazy-search) $ nox -s fmt_check
 ```
 
 ## Type Checking
@@ -212,7 +246,7 @@ def factorial(n: int) -> int:
 mypy is configured in [`pyproject.toml`](./pyproject.toml). To type check code, run:
 
 ```bash
-(fact) $ nox -s type_check
+(lazy-search) $ nox -s type_check
 ```
 
 See also [awesome-python-typing](https://github.com/typeddjango/awesome-python-typing).
@@ -224,7 +258,7 @@ communicate the presence of inline type annotations to static type
 checkers. [mypy's documentation](https://mypy.readthedocs.io/en/stable/installed_packages.html)
 provides further examples on how to do this.
 
-Mypy looks for the existence of a file named [`py.typed`](./src/fact/py.typed) in the root of the
+Mypy looks for the existence of a file named [`py.typed`](src/lazy_search/py.typed) in the root of the
 installed package to indicate that inline type annotations should be checked.
 
 ## Continuous Integration
@@ -248,7 +282,7 @@ to be hosted at any URL or viewed offline from the file system.
 To build the user guide, run,
 
 ```bash
-(fact) $ nox -s docs
+(lazy-search) $ nox -s docs
 ```
 
 and open `docs/user_guide/site/index.html` using a web browser.
@@ -256,20 +290,20 @@ and open `docs/user_guide/site/index.html` using a web browser.
 To build the user guide, additionally validating external URLs, run:
 
 ```bash
-(fact) $ nox -s docs_check_urls
+(lazy-search) $ nox -s docs_check_urls
 ```
 
 To build the user guide in a format suitable for viewing directly from the file system, run:
 
 ```bash
-(fact) $ nox -s docs_offline
+(lazy-search) $ nox -s docs_offline
 ```
 
 To build and serve the user guide with automatic rebuilding as you change the contents,
 run:
 
 ```bash
-(fact) $ nox -s docs_serve
+(lazy-search) $ nox -s docs_serve
 ``` 
 
 and open <http://127.0.0.1:8000> in a browser.
@@ -382,7 +416,7 @@ To automatically list the licenses for all dependencies in (and their transitive
 using [pip-licenses](https://github.com/raimon49/pip-licenses):
 
 ```bash
-(fact) $ nox -N -s licenses
+(lazy-search) $ nox -N -s licenses
 ...
  Name      Version  License     
  click     8.1.3    BSD License 
@@ -406,13 +440,13 @@ Docker is configured in:
 To build the container image:
 
 ```bash
-$ docker build --tag fact .
+$ docker build --tag lazy_search .
 ```
 
 To run the image in a container:
 
 ```bash
-$ docker run --rm --interactive --tty fact 5
+$ docker run --rm --interactive --tty lazy_search 5
 ```
 
 > Note: If you need to install Poetry on Alpine Linux, see the pre-built 

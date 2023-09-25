@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "fact"
+name = "Lazy Search"
 version = "1.0.0"
-description = "Example Python project using best practices"
+description = "Python Script, that searches the web for a given query and summarizes the results."
 authors = ["Felix Kotschenreuther <fkotschenreuther@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/2000game/python-blueprint"
-documentation = "https://2000game.github.io/python-blueprint/"
+repository = "https://github.com/2000game/lazy-search"
+documentation = "https://2000game.github.io/lazy-search/"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -64,7 +64,7 @@ mkdocs-gen-files = "*"
 mkdocs-literate-nav = "*"
 
 #[tool.poetry.scripts]
-#fact = "fact.cli:app"
+#lazy_search = "lazy_search.cli:app"
 
 [build-system]
 requires = ["poetry-core"]
