@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Lazy Search"
+name = "lazy_search"
 version = "1.0.0"
 description = "Python Script, that searches the web for a given query and summarizes the results."
 authors = ["Felix Kotschenreuther <fkotschenreuther@gmail.com>"]
@@ -19,6 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Typing :: Typed",
     # Include this classifier to prevent accidently publishing private code to PyPI.
     #   https://pypi.org/classifiers/
@@ -29,9 +30,11 @@ classifiers = [
 # Some packages, such as scipy, constrain their upper bound of Python versions they support.
 # Without also constraining the upper bound here, Poetry will not select those versions and will
 # result in an old version being resolved/locked.
-python = "^3.8, <3.12"
+python = "^3.8, <=3.12"
 rich = "*"
 typer = { version = "*", extras = ["all"] }
+googlenews = "^1.6.10"
+pydantic = "^2.4.0"
 
 [tool.poetry.group.nox.dependencies]
 nox-poetry = "*"
@@ -73,11 +76,12 @@ build-backend = "poetry.core.masonry.api"
 [tool.mypy]
 ignore_missing_imports = true
 strict = true
+plugins = ["pydantic.mypy"]
 # If certain strict config options are too pedantic for a project,
 # disable them selectively here by setting to false.
 
 [tool.ruff]
-line-length = 99
+line-length = 120
 target-version = "py38"
 extend-select = [
     "I", # isort

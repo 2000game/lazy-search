@@ -2,10 +2,7 @@
 
 from typing import Annotated
 
-from rich.console import Console
 from typer import Argument, Typer
-
-from lazy_search.lib import factorial
 
 app = Typer(add_completion=False)
 
