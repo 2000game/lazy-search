@@ -37,7 +37,7 @@ Lazy Search is a command-line application that allows users to search the web fo
 3. Install the required dependencies:
 Since the project is build with poetry, there is a poetry.lock file that contains all the dependencies. To install the dependencies, run the following command:
    ```bash
-   pip install.
+   pip install .
    ```
 
 4. Obtain an API key from [News API](https://newsapi.org/) by registering on their website.
