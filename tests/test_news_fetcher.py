@@ -1,40 +1,27 @@
-from datetime import datetime
+import os
 
-from lazy_search.news_fetcher import NewsFetcher, NewsModel
+import pytest
 
-fake_news_results = [
-    {
-        "title": "This 2023 Python Bootcamp Is $10 Right Now",
-        "media": "Lifehacker",
-        "date": "9 mins ago",
-        "datetime": datetime(2023, 9, 25, 16, 40, 18, 571550),
-        "desc": "",
-        "link": "https://lifehacker.com/this-2023-python-bootcamp-is-10-right-now-1850863052&ved=2ahUKEwjWmpX"
-        "-gMaBAxVaSPEDHXTsDYgQxfQBegQIBhAC&usg=AOvVaw3ztPjby09zC7aj89UxeeFJ",
-        "img": "data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
-    },
-    {
-        "title": "The Python on Hardware Newsletter: subscribe for free #CircuitPython #Python #RaspberryPi "
-        "@micropython @ThePSF",
-        "media": "Adafruit Blog",
-        "date": "1 hour ago",
-        "datetime": datetime(2023, 9, 25, 15, 49, 26, 714939),
-        "desc": "",
-        "link": "https://blog.adafruit.com/2023/09/25/the-python-on-hardware-newsletter-subscribe-for-free"
-        "-circuitpython-python-raspberrypi-micropython-thepsf-15/&ved=2ahUKEwjWmpX"
-        "-gMaBAxVaSPEDHXTsDYgQxfQBegQICRAC&usg=AOvVaw29EyWjtyZDaaj8phTLUOew",
-        "img": "data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
-    },
-]
+from lazy_search.models import ArticleModel, NewsResponseModel
+from lazy_search.news_fetcher import NewsFetcher
+from tests.test_data import fake_news_response
 
 
-def test_news_model() -> None:
-    fake_data = fake_news_results[0]
-    NewsModel(**fake_data)
+def test_news_article_model() -> None:
+    article = fake_news_response["articles"][0]  # type: ignore
+    model = ArticleModel(**article)
+    assert model.title == article["title"]
 
 
+def test_news_response_model() -> None:
+    model = NewsResponseModel(**fake_news_response)
+    assert model.status == "ok"
+    assert model.totalResults == 4107
+    assert len(model.articles) == 15
+
+
+@pytest.mark.skipif(not os.environ.get("NEWS_API_KEY"), reason="No API key set")
 def test_basic_search() -> None:
     news_fetcher = NewsFetcher()
-    results = news_fetcher.search("python")
-    assert len(results) > 0
-    assert all(isinstance(result, NewsModel) for result in results)
+    results = news_fetcher.search("apple news")
+    assert isinstance(results, NewsResponseModel)

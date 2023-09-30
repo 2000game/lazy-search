@@ -1,25 +1,24 @@
 from __future__ import annotations
 
-from datetime import datetime
+import os
 
-from GoogleNews import GoogleNews
-from pydantic import BaseModel
+from dotenv import load_dotenv
+from newsapi import NewsApiClient
+
+from lazy_search.models import ArticleLanguage, NewsRequestModel, NewsResponseModel
+
+load_dotenv()
 
 
 class NewsFetcher:
-    def __init__(self) -> None:
-        self.google_news = GoogleNews()
+    def __init__(self, api_key: str | None = "") -> None:
+        if api_key == "":
+            api_key = os.environ.get("NEWS_API_KEY")
+        self.news_api = NewsApiClient(api_key=api_key)
 
-    def search(self, topic: str, language: str = "en") -> list[NewsModel]:
-        self.google_news.set_lang(language)
-        self.google_news.search(topic)
-        results = self.google_news.results()
-        return [NewsModel(**result) for result in results]
-
-
-class NewsModel(BaseModel):
-    title: str
-    media: str
-    datetime: datetime
-    desc: str
-    link: str
+    def search(
+        self, topic: str, language: ArticleLanguage = ArticleLanguage.ENGLISH
+    ) -> NewsResponseModel:
+        request_model = NewsRequestModel(q=topic, language=language)
+        response = self.news_api.get_everything(**dict(request_model))
+        return NewsResponseModel(**response)
