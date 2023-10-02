@@ -29,7 +29,7 @@ classifiers = [
 # Some packages, such as scipy, constrain their upper bound of Python versions they support.
 # Without also constraining the upper bound here, Poetry will not select those versions and will
 # result in an old version being resolved/locked.
-python = "^3.8, <=3.12"
+python = "^3.9, <=3.12"
 rich = "*"
 typer = { version = "*", extras = ["all"] }
 pydantic = "^2.4.0"
