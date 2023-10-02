@@ -1,5 +1,3 @@
-# python-blueprint
-
 [![GitHub Actions][github-actions-badge]](https://github.com/johnthagen/python-blueprint/actions)
 [![Poetry][poetry-badge]](https://python-poetry.org/)
 [![Nox][nox-badge]](https://github.com/wntrblm/nox)
